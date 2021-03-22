@@ -1,11 +1,11 @@
 package com.work.working_project_1.model;
 
-import com.work.working_project_1.commons.UserRole;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Users")
@@ -25,14 +25,23 @@ public class User {
     @NotNull
     private String password;
 
-    @Builder.Default
     private LocalDateTime registrationTime = LocalDateTime.now();
 
     @Column(unique = true)
     @NotNull
     private String phoneNumber;
 
-    @Builder.Default
-    private UserRole userRole = UserRole.USER;
+    private String resetPasswordToken;
+
+    @NotNull
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Users_role",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+
+    private Collection<Role> role;
 
 }
