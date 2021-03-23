@@ -1,5 +1,6 @@
 package com.work.working_project_1.dto;
 
+import com.work.working_project_1.model.FarmIndicators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,22 +8,22 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class FarmDto {
+
     @NotEmpty
     private Long id;
 
     @NotEmpty
-    private String username;
+    private String farmName;
 
-    @NotEmpty
-    private LocalDateTime registrationTime;
+    private LocalDateTime creationTime;
 
-    @NotEmpty
-    private String phoneNumber;
+    private Collection<FarmIndicators> farmIndicators;
 
 }
