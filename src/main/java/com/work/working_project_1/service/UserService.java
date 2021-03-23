@@ -9,7 +9,6 @@ import com.work.working_project_1.model.User;
 import com.work.working_project_1.repository.RoleRepository;
 import com.work.working_project_1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +23,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@Primary
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -77,29 +75,29 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public void updateResetPassword(String token, String phoneNumber) {
-        User user = userRepository.findByPhoneNumber(phoneNumber);
-        if (user != null) {
-            user.setResetPasswordToken(token);
-            userRepository.save(user);
-        } else {
-            throw new UsernameNotFoundException("Could not find any User with this Phone number" + phoneNumber);
-        }
-    }
-
-    public User get(String resetPasswordToken) {
-        return userRepository.findByResetPasswordToken(resetPasswordToken);
-    }
-
-    public void updatePassword(User user, String newPassword) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodePassword = passwordEncoder.encode(newPassword);
-
-        user.setPassword(encodePassword);
-        user.setResetPasswordToken(null);
-
-        userRepository.save(user);
-    }
+//    public void updateResetPassword(String token, String phoneNumber) {
+//        User user = userRepository.findByPhoneNumber(phoneNumber);
+//        if (user != null) {
+//            user.setResetPasswordToken(token);
+//            userRepository.save(user);
+//        } else {
+//            throw new UsernameNotFoundException("Could not find any User with this Phone number" + phoneNumber);
+//        }
+//    }
+//
+//    public User get(String resetPasswordToken) {
+//        return userRepository.findByResetPasswordToken(resetPasswordToken);
+//    }
+//
+//    public void updatePassword(User user, String newPassword) {
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String encodePassword = passwordEncoder.encode(newPassword);
+//
+//        user.setPassword(encodePassword);
+//        user.setResetPasswordToken(null);
+//
+//        userRepository.save(user);
+//    }
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {

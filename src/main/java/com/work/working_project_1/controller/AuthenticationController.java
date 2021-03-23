@@ -22,14 +22,16 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     public String currentUsername;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final TokenProvider jwtTokenUtil;
+    private final UserService userService;
 
     @Autowired
-    private TokenProvider jwtTokenUtil;
-
-    @Autowired
-    private UserService userService;
+    public AuthenticationController(AuthenticationManager authenticationManager, TokenProvider jwtTokenUtil, UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userService = userService;
+    }
 
     @PostMapping
     public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
