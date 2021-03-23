@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "farmindicators")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,8 +17,8 @@ import java.time.LocalDateTime;
 public class FarmIndicators {
 
     @Id
-    @OneToOne(mappedBy = "farm_id")
-    private Farm farmId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private LocalDateTime localDateTime;
 
@@ -44,4 +45,9 @@ public class FarmIndicators {
     private Double pH;
 
     private Double conductivity;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "farm_id")
+    private Farm farm;
 }

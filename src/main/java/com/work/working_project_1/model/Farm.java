@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Farms")
+@Table(name = "farm")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +26,7 @@ public class Farm {
     @Column(name = "creation_time")
     private LocalDateTime creationTime;
 
-    @OneToOne(targetEntity = FarmIndicators.class, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "farm", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private FarmIndicators farmIndicators;
 }
