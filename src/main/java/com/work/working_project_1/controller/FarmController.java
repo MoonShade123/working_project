@@ -30,7 +30,12 @@ public class FarmController {
         return new ResponseEntity<>(this.farmService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/name/{farmName}")
+    public ResponseEntity<FarmDto> getFarmByName(@PathVariable final String farmName) {
+        return new ResponseEntity<>(this.farmService.getByName(farmName), HttpStatus.OK);
+    }
+
+    @GetMapping("/id/{id}")
     public ResponseEntity<FarmDto> getFarmById(@PathVariable final Long id) {
         return new ResponseEntity<>(this.farmService.getById(id), HttpStatus.OK);
     }

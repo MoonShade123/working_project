@@ -13,6 +13,6 @@ public interface FarmRepository extends JpaRepository<Farm, Long> {
     @Query("from Farm f order by f.creationTime desc")
     Collection<Farm> findAllSortedByDateReverse();
 
-//    Farm findByFarmName(final String farmName);
+    Farm findByFarmName(final String farmName);
 
 }

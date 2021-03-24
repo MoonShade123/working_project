@@ -43,6 +43,11 @@ public class FarmService {
 
     }
 
+    public FarmDto getByName(final String farmName) {
+        Farm farm = this.farmRepository.findByFarmName(farmName);
+        return ToDtoConverter.farmToDto(farm);
+    }
+
     public FarmDto getById(final Long id) {
 
         Farm farm = this.farmRepository.findById(id).orElseThrow(
