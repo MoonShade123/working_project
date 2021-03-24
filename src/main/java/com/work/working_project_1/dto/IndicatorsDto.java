@@ -1,53 +1,54 @@
-package com.work.working_project_1.model;
+package com.work.working_project_1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "farmindicators")
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FarmIndicators {
+public class IndicatorsDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private LocalDateTime localDateTime;
 
-    private LocalDateTime localDateTime = LocalDateTime.now();
-
+    @NotEmpty
     private Double fat;
 
+    @NotEmpty
     private Double protein;
 
+    @NotEmpty
     private Double COMO;
 
+    @NotEmpty
     private Double dry_substances;
 
+    @NotEmpty
     private Double density;
 
+    @NotEmpty
     private Double lactose;
 
+    @NotEmpty
     private Double added_water;
 
+    @NotEmpty
     private Double sample_temperature;
 
+    @NotEmpty
     private Double freezing_point;
 
+    @NotEmpty
     private Double salts;
 
+    @NotEmpty
     private Double pH;
 
+    @NotEmpty
     private Double conductivity;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "farm_id")
-    private Farm farm;
 }

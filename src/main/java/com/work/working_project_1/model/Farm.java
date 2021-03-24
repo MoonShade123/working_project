@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,6 +22,7 @@ public class Farm {
     private Long id;
 
     @Column(unique = true)
+    @NotEmpty
     private String farmName;
 
     @Column(name = "creation_time")

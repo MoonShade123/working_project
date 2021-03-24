@@ -1,8 +1,10 @@
 package com.work.working_project_1.dto.dtoConverter;
 
 import com.work.working_project_1.dto.FarmDto;
+import com.work.working_project_1.dto.IndicatorsDto;
 import com.work.working_project_1.dto.UserDto;
 import com.work.working_project_1.model.Farm;
+import com.work.working_project_1.model.FarmIndicators;
 import com.work.working_project_1.model.User;
 
 import java.util.Collections;

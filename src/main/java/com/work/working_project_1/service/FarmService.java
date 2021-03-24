@@ -1,6 +1,7 @@
 package com.work.working_project_1.service;
 
 import com.work.working_project_1.dto.FarmDto;
+import com.work.working_project_1.dto.IndicatorsDto;
 import com.work.working_project_1.dto.dtoConverter.FromDtoConverter;
 import com.work.working_project_1.dto.dtoConverter.ToDtoConverter;
 import com.work.working_project_1.exceptions.FarmException;
@@ -44,8 +45,10 @@ public class FarmService {
     }
 
     public FarmDto getByName(final String farmName) {
+
         Farm farm = this.farmRepository.findByFarmName(farmName);
         return ToDtoConverter.farmToDto(farm);
+
     }
 
     public FarmDto getById(final Long id) {

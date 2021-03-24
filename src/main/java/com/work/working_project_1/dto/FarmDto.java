@@ -16,7 +16,6 @@ import java.util.Collection;
 @NoArgsConstructor
 public class FarmDto {
 
-    @NotEmpty
     private Long id;
 
     @NotEmpty
