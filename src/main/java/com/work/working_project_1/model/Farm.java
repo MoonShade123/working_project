@@ -19,10 +19,10 @@ public class Farm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "farm_id")
     private Long id;
 
     @Column(unique = true)
-    @NotEmpty
     private String farmName;
 
     @Column(name = "creation_time")
@@ -31,4 +31,6 @@ public class Farm {
     @OneToOne(mappedBy = "farm", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private FarmIndicators farmIndicators;
+
+
 }

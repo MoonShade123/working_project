@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 public class FarmIndicators {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime localDateTime = LocalDateTime.now();
@@ -50,4 +49,9 @@ public class FarmIndicators {
     @MapsId
     @JoinColumn(name = "farm_id")
     private Farm farm;
+
+    public void setFarm(Farm farm) {
+        this.farm = farm;
+        this.id = farm.getId();
+    }
 }

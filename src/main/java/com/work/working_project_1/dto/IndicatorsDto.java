@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class IndicatorsDto {
 
+    private Long farmId;
+
     private LocalDateTime localDateTime;
 
     @NotEmpty
