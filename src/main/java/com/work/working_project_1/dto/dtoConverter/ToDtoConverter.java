@@ -8,6 +8,7 @@ import com.work.working_project_1.model.Farm;
 import com.work.working_project_1.model.FarmIndicators;
 import com.work.working_project_1.model.User;
 
+import java.util.Collection;
 import java.util.Collections;
 
 
@@ -27,7 +28,7 @@ public class ToDtoConverter {
                 farm.getId(),
                 farm.getFarmName(),
                 farm.getCreationTime(),
-                Collections.singleton(farm.getFarmIndicators())
+                farm.getFarmIndicators()
         );
     }
 

@@ -15,6 +15,7 @@ public class FromDtoConverter {
 
     public static FarmIndicators dtoToIndicators(final IndicatorsDto indicatorsDto) {
         FarmIndicators farmIndicators = new FarmIndicators();
+                farmIndicators.setFarm(farmIndicators.getFarm());
                 farmIndicators.setFat(indicatorsDto.getFat());
                 farmIndicators.setProtein(indicatorsDto.getProtein());
                 farmIndicators.setCOMO(indicatorsDto.getCOMO());

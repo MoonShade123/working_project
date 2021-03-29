@@ -1,14 +1,17 @@
 package com.work.working_project_1.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@DynamicUpdate
 @Table(name = "farmindicators")
 @Getter
 @Setter
@@ -17,6 +20,7 @@ import java.time.LocalDateTime;
 public class FarmIndicators {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime localDateTime = LocalDateTime.now();
@@ -45,13 +49,9 @@ public class FarmIndicators {
 
     private Double conductivity;
 
-    @OneToOne
-    @MapsId
+    @ManyToOne
     @JoinColumn(name = "farm_id")
+    @JsonIgnore
     private Farm farm;
 
-    public void setFarm(Farm farm) {
-        this.farm = farm;
-        this.id = farm.getId();
-    }
 }
