@@ -1,5 +1,6 @@
 package com.work.working_project_1.model;
 
+import com.work.working_project_1.phoneValidation.Phone;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,9 +30,8 @@ public class User {
 
     @Column(unique = true)
     @NotNull
+    @Phone
     private String phoneNumber;
-
-    private String resetPasswordToken;
 
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
