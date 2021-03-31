@@ -62,6 +62,12 @@ public class UserService implements UserDetailsService {
     }
 
     @PreAuthorize("hasRole('USER')")
+    public String findByPhoneNumber(final String phoneNumber) {
+        User user = this.userRepository.findByPhoneNumber(phoneNumber);
+        return user.getPhoneNumber();
+    }
+
+    @PreAuthorize("hasRole('USER')")
     public UserDto update(final User user) {
         this.userRepository.findById(user.getId()).orElseThrow(
                 () -> new UserException("Can't update. User not found!")
@@ -74,30 +80,6 @@ public class UserService implements UserDetailsService {
     public User findOne(final String username) {
         return userRepository.findByUsername(username);
     }
-
-//    public void updateResetPassword(String token, String phoneNumber) {
-//        User user = userRepository.findByPhoneNumber(phoneNumber);
-//        if (user != null) {
-//            user.setResetPasswordToken(token);
-//            userRepository.save(user);
-//        } else {
-//            throw new UsernameNotFoundException("Could not find any User with this Phone number" + phoneNumber);
-//        }
-//    }
-//
-//    public User get(String resetPasswordToken) {
-//        return userRepository.findByResetPasswordToken(resetPasswordToken);
-//    }
-//
-//    public void updatePassword(User user, String newPassword) {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String encodePassword = passwordEncoder.encode(newPassword);
-//
-//        user.setPassword(encodePassword);
-//        user.setResetPasswordToken(null);
-//
-//        userRepository.save(user);
-//    }
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
