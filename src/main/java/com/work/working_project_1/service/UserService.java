@@ -61,10 +61,8 @@ public class UserService implements UserDetailsService {
         return ToDtoConverter.userToDto(user);
     }
 
-    @PreAuthorize("hasRole('USER')")
-    public String findByPhoneNumber(final String phoneNumber) {
-        User user = this.userRepository.findByPhoneNumber(phoneNumber);
-        return user.getPhoneNumber();
+    public User getByPhoneNumber(final String phoneNumber) {
+        return userRepository.findByPhoneNumber(phoneNumber);
     }
 
     @PreAuthorize("hasRole('USER')")

@@ -1,7 +1,5 @@
 package com.work.working_project_1.controller;
 
-import com.work.working_project_1.dto.UserDto;
-import com.work.working_project_1.model.User;
 import com.work.working_project_1.service.PhoneVerificationService;
 import com.work.working_project_1.service.UserService;
 import com.work.working_project_1.twilio.TwilioVerificationResult;
@@ -10,7 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/sign-in")
+@RestController
+@RequestMapping("/sign-in")
 public class TwilioController {
 
     private final UserService userService;
@@ -23,9 +22,9 @@ public class TwilioController {
     }
 
     @PostMapping("/send-otp")
-    public ResponseEntity<String> sendOtp(@RequestParam("phoneNumber") String phoneNumber) {
+    public ResponseEntity<String> sendOtp(@RequestBody String phoneNumber) {
 
-        TwilioVerificationResult result = phoneVerificationService.startVerification(this.userService.findByPhoneNumber(phoneNumber));
+        TwilioVerificationResult result = phoneVerificationService.startVerification(String.valueOf(userService.getByPhoneNumber(phoneNumber)));
         if (result.isValid()) {
             return new ResponseEntity<>("Otp Sent...", HttpStatus.OK);
         }
