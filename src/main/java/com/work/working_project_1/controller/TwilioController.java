@@ -21,14 +21,24 @@ public class TwilioController {
         this.phoneVerificationService = phoneVerificationService;
     }
 
-    @PostMapping("/send-otp")
-    public ResponseEntity<String> sendOtp(@RequestBody String phoneNumber) {
+    @PostMapping(value = "/send-otp")
+    public ResponseEntity<String> sendOtp(@RequestParam String phoneNumber) {
 
-        TwilioVerificationResult result = phoneVerificationService.startVerification(String.valueOf(userService.getByPhoneNumber(phoneNumber)));
+        TwilioVerificationResult result = phoneVerificationService.startVerification(phoneNumber);
         if (result.isValid()) {
             return new ResponseEntity<>("Otp Sent...", HttpStatus.OK);
         }
         return new ResponseEntity<>("Otp failed to Sent...", HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping(value = "/verify-otp")
+    public ResponseEntity<String> verifyOtp(@RequestParam String phoneNumber, @RequestParam String otp) {
+
+        TwilioVerificationResult result = phoneVerificationService.checkVerification(phoneNumber, otp);
+        if (result.isValid()) {
+            return new ResponseEntity<>("Your number successfully verified", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Something went wrong / Incorrect verification code", HttpStatus.BAD_REQUEST);
     }
 
 }
