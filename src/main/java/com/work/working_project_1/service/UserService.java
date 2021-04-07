@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,8 +62,16 @@ public class UserService implements UserDetailsService {
         return ToDtoConverter.userToDto(user);
     }
 
-    public User getByPhoneNumber(final String phoneNumber) {
-        return userRepository.findByPhoneNumber(phoneNumber);
+    public @NotNull String getPhoneNumberByUsername(final String username) {
+        return userRepository.getAllByUsername(username).getPhoneNumber();
+    }
+
+    public String getUsernameByPhoneNumber(final String phoneNumber) {
+        return userRepository.getAllByPhoneNumber(phoneNumber).getUsername();
+    }
+
+    public String getPasswordByPhoneNumber(final String phoneNumber) {
+        return userRepository.getAllByPhoneNumber(phoneNumber).getPassword();
     }
 
     @PreAuthorize("hasRole('USER')")

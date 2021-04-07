@@ -32,9 +32,9 @@ public class PhoneVerificationService {
         return null;
     }
 
-    public TwilioVerificationResult checkVerification(String phoneNumber, String otp) {
+    public TwilioVerificationResult checkVerification(String phoneNumber, String code) {
         try {
-            VerificationCheck verificationCheck = VerificationCheck.creator(twilioConfiguration.getServiceId(), otp).setTo(phoneNumber).create();
+            VerificationCheck verificationCheck = VerificationCheck.creator(twilioConfiguration.getServiceId(), code).setTo(phoneNumber).create();
             if ("approved".equals(verificationCheck.getStatus())) {
                 return new TwilioVerificationResult(verificationCheck.getSid());
             }
