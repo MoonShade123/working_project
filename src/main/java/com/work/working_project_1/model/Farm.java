@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -27,6 +28,7 @@ public class Farm {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank(message = "Farm name must be filled")
     private String farmName;
 
     @Column(name = "creation_time")

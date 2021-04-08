@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
@@ -16,13 +17,13 @@ public class UserDto {
     @NotEmpty
     private Long id;
 
-    @NotEmpty
+    @NotBlank(message = "Username must be filled")
     private String username;
 
     @NotEmpty
     private LocalDateTime registrationTime;
 
-    @NotEmpty
+    @NotBlank(message = "Phone number must be filled")
     private String phoneNumber;
 
 }

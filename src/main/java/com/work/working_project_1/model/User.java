@@ -4,6 +4,7 @@ import com.work.working_project_1.phoneValidation.Phone;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -21,16 +22,16 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    @NotNull
+    @NotBlank(message = "Username must be filled")
     private String username;
 
-    @NotNull
+    @NotBlank(message = "Password must be filled")
     private String password;
 
     private LocalDateTime registrationTime = LocalDateTime.now();
 
     @Column(unique = true)
-    @NotNull
+    @NotBlank(message = "Phone number must be filled")
     @Phone
     private String phoneNumber;
 
