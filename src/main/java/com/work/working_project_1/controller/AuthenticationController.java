@@ -4,7 +4,6 @@ import com.work.working_project_1.dto.UserDto;
 import com.work.working_project_1.dto.dtoConverter.ToDtoConverter;
 import com.work.working_project_1.model.AuthToken;
 import com.work.working_project_1.model.LoginUser;
-import com.work.working_project_1.model.User;
 import com.work.working_project_1.security.TokenProvider;
 import com.work.working_project_1.service.PhoneVerificationService;
 import com.work.working_project_1.service.UserService;
@@ -18,8 +17,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/sign-in")
@@ -52,8 +52,10 @@ public class AuthenticationController {
         final String token = jwtTokenUtil.generateToken(authentication);
         currentUsername = jwtTokenUtil.getUsernameFromToken(token);
         TwilioVerificationResult result = phoneVerificationService.startVerification(String.valueOf(userService.getPhoneNumberByUsername(currentUsername)));
+        HashMap<String, String> phones= new HashMap<>();
+        phones.put("phoneNumber", userService.getPhoneNumberByUsername(currentUsername));
         if (result.isValid()) {
-            return new ResponseEntity<>("Otp Sent...", HttpStatus.OK);
+            return new ResponseEntity<>(phones, HttpStatus.OK);
         }
         return new ResponseEntity<>("Otp failed to Sent...", HttpStatus.BAD_REQUEST);
     }
