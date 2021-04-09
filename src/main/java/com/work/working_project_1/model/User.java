@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
@@ -33,6 +34,7 @@ public class User {
     @Column(unique = true)
     @NotBlank(message = "Phone number must be filled")
     @Phone
+    @Size(min = 8, max = 13)
     private String phoneNumber;
 
     @NotNull

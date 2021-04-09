@@ -52,7 +52,7 @@ public class AuthenticationController {
         final String token = jwtTokenUtil.generateToken(authentication);
         currentUsername = jwtTokenUtil.getUsernameFromToken(token);
         TwilioVerificationResult result = phoneVerificationService.startVerification(String.valueOf(userService.getPhoneNumberByUsername(currentUsername)));
-        HashMap<String, String> phones= new HashMap<>();
+        HashMap<String, String> phones = new HashMap<>();
         phones.put("phoneNumber", userService.getPhoneNumberByUsername(currentUsername));
         if (result.isValid()) {
             return new ResponseEntity<>(phones, HttpStatus.OK);

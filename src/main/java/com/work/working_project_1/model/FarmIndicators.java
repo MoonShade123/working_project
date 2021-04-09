@@ -1,6 +1,7 @@
 package com.work.working_project_1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.work.working_project_1.commons.IndicatorsNominal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,9 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,6 +30,7 @@ public class FarmIndicators {
     private LocalDateTime localDateTime = LocalDateTime.now();
 
     @NotBlank(message = "Fat mush be filled")
+
     private Double fat;
 
     @NotBlank(message = "Protein mush be filled")
