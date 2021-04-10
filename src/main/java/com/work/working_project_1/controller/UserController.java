@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public void signUpUser(@RequestBody final User user) {
+    public void signUpUser(@Valid @RequestBody final User user) {
         this.userService.signUp(user);
     }
 
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDto> updateUser(@RequestBody final User user) {
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody final User user) {
         return new ResponseEntity<>(this.userService.update(user), HttpStatus.OK);
     }
 }

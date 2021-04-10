@@ -23,6 +23,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class FarmIndicators {
 
+    public static final Double MIN_VALUE = 0.5;
+    public static final Double MAX_VALUE = 1.5;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

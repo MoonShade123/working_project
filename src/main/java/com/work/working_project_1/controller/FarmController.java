@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
@@ -26,12 +27,12 @@ public class FarmController {
     }
 
     @PostMapping
-    public ResponseEntity<FarmDto> createFarm(@RequestBody final FarmDto farmDto) {
+    public ResponseEntity<FarmDto> createFarm(@Valid @RequestBody final FarmDto farmDto) {
         return new ResponseEntity<>(this.farmService.create(farmDto), HttpStatus.OK);
     }
 
     @PostMapping("/add-indicators")
-    public ResponseEntity<IndicatorsDto> createFarmIndicators(@RequestBody final IndicatorsDto indicatorsDto) {
+    public ResponseEntity<IndicatorsDto> createFarmIndicators(@Valid @RequestBody final IndicatorsDto indicatorsDto) {
         return new ResponseEntity<>(this.indicatorsService.create(indicatorsDto), HttpStatus.OK);
     }
 
@@ -52,7 +53,7 @@ public class FarmController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteFarmById(@PathVariable final Long id) {
+    public ResponseEntity deleteFarmById(@Valid @PathVariable final Long id) {
         this.farmService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }
