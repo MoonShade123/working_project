@@ -37,7 +37,6 @@ public class User {
     @Size(min = 8, max = 13)
     private String phoneNumber;
 
-    @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Users_role",
