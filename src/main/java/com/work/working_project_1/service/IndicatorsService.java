@@ -28,7 +28,6 @@ public class IndicatorsService {
     @PreAuthorize("hasRole('USER')")
     public IndicatorsDto create(final IndicatorsDto indicatorsDto) {
 
-        Farm farm = new Farm();
         FarmIndicators farmIndicators = FromDtoConverter.dtoToIndicators(indicatorsDto);
         farmIndicators.setFarm(farmRepository.getOne(indicatorsDto.getFarmId()));
         farmIndicators.setLocalDateTime(LocalDateTime.now());

@@ -1,5 +1,6 @@
 package com.work.working_project_1.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
+
     @NotEmpty
     private Long id;
 
@@ -21,6 +23,7 @@ public class UserDto {
     private String username;
 
     @NotEmpty
+    @ApiModelProperty(hidden = true)
     private LocalDateTime registrationTime;
 
     @NotBlank(message = "Phone number must be filled")

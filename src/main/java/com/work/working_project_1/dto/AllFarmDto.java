@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class AllFarmDto {
     private Long id;
 
-    @NotEmpty
+    @NotBlank(message = "Farm name must be filled")
     private String farmName;
 
     private LocalDateTime creationTime;

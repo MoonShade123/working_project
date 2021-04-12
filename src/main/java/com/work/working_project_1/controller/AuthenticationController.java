@@ -62,7 +62,7 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/verify-otp")
-    public ResponseEntity<?> verifyOtp(@RequestParam String password, @RequestParam String phoneNumber, @RequestParam String code) {
+    public ResponseEntity<?> verifyOtp(@Valid @RequestParam String password, @Valid @RequestParam String phoneNumber, @Valid @RequestParam String code) {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

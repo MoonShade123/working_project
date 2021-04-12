@@ -1,11 +1,14 @@
 package com.work.working_project_1.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Setter
@@ -16,41 +19,42 @@ public class IndicatorsDto {
 
     private Long farmId;
 
+    @ApiModelProperty(hidden = true)
     private LocalDateTime localDateTime;
 
-    @NotEmpty
+    @NotNull(message = "Fat")
     private Double fat;
 
-    @NotEmpty
+    @NotNull(message = "protein")
     private Double protein;
 
-    @NotEmpty
+    @NotNull(message = "COMO")
     private Double COMO;
 
-    @NotEmpty
+    @NotNull(message = "dry_substances")
     private Double dry_substances;
 
-    @NotEmpty
+    @NotNull(message = "density")
     private Double density;
 
-    @NotEmpty
+    @NotNull(message = "lactose")
     private Double lactose;
 
-    @NotEmpty
+    @NotNull(message = "added_water")
     private Double added_water;
 
-    @NotEmpty
+    @NotNull(message = "sample_temperature")
     private Double sample_temperature;
 
-    @NotEmpty
+    @NotNull(message = "freezing_point")
     private Double freezing_point;
 
-    @NotEmpty
+    @NotNull(message = "salts")
     private Double salts;
 
-    @NotEmpty
+    @NotNull(message = "pH")
     private Double pH;
 
-    @NotEmpty
+    @NotNull(message = "conductivity")
     private Double conductivity;
 }

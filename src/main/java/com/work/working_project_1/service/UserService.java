@@ -70,10 +70,6 @@ public class UserService implements UserDetailsService {
         return userRepository.getAllByPhoneNumber(phoneNumber).getUsername();
     }
 
-    public String getPasswordByPhoneNumber(final String phoneNumber) {
-        return userRepository.getAllByPhoneNumber(phoneNumber).getPassword();
-    }
-
     @PreAuthorize("hasRole('USER')")
     public UserDto update(final User user) {
         this.userRepository.findById(user.getId()).orElseThrow(

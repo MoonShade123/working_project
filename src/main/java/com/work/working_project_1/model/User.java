@@ -1,6 +1,7 @@
 package com.work.working_project_1.model;
 
 import com.work.working_project_1.phoneValidation.Phone;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class User {
     @Id
+    @ApiModelProperty(hidden = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -29,6 +31,7 @@ public class User {
     @NotBlank(message = "Password must be filled")
     private String password;
 
+    @ApiModelProperty(hidden = true)
     private LocalDateTime registrationTime = LocalDateTime.now();
 
     @Column(unique = true)
@@ -37,6 +40,7 @@ public class User {
     @Size(min = 8, max = 13)
     private String phoneNumber;
 
+    @ApiModelProperty(hidden = true)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Users_role",

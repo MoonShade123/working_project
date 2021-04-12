@@ -2,12 +2,9 @@ package com.work.working_project_1.service;
 
 import com.work.working_project_1.dto.AllFarmDto;
 import com.work.working_project_1.dto.FarmDto;
-import com.work.working_project_1.dto.IndicatorsDto;
 import com.work.working_project_1.dto.dtoConverter.FromDtoConverter;
 import com.work.working_project_1.dto.dtoConverter.ToDtoConverter;
-import com.work.working_project_1.exceptions.FarmException;
 import com.work.working_project_1.model.Farm;
-import com.work.working_project_1.model.FarmIndicators;
 import com.work.working_project_1.repository.FarmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,7 +27,6 @@ public class FarmService {
     @PreAuthorize("hasRole('USER')")
     public FarmDto create(final FarmDto farmDto) {
 
-        FarmIndicators farmIndicators = new FarmIndicators();
         Farm farm = FromDtoConverter.dtoToFarm(farmDto);
         farm.setCreationTime(LocalDateTime.now());
         this.farmRepository.save(farm);
@@ -38,6 +34,7 @@ public class FarmService {
 
     }
 
+    @PreAuthorize("hasRole('USER')")
     public Collection<AllFarmDto> getAll() {
 
         Collection<Farm> posts = this.farmRepository.findAllSortedByDateReverse();
@@ -47,17 +44,10 @@ public class FarmService {
 
     }
 
+    @PreAuthorize("hasRole('USER')")
     public FarmDto getByName(final String farmName) {
 
         Farm farm = this.farmRepository.findByFarmName(farmName);
-        return ToDtoConverter.farmToDto(farm);
-
-    }
-
-    public FarmDto getById(final Long id) {
-
-        Farm farm = this.farmRepository.findById(id).orElseThrow(
-                () -> new FarmException("Can't get. Farm not found!"));
         return ToDtoConverter.farmToDto(farm);
 
     }
