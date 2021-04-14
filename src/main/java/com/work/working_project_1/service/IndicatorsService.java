@@ -3,7 +3,6 @@ package com.work.working_project_1.service;
 import com.work.working_project_1.dto.IndicatorsDto;
 import com.work.working_project_1.dto.dtoConverter.FromDtoConverter;
 import com.work.working_project_1.dto.dtoConverter.ToDtoConverter;
-import com.work.working_project_1.model.Farm;
 import com.work.working_project_1.model.FarmIndicators;
 import com.work.working_project_1.repository.FarmRepository;
 import com.work.working_project_1.repository.IndicatorsRepository;
@@ -36,4 +35,9 @@ public class IndicatorsService {
 
     }
 
+    @PreAuthorize("hasRole('USER')")
+    public IndicatorsDto getByDate(final LocalDateTime localDateTime) {
+        FarmIndicators farmIndicators = this.indicatorsRepository.getByLocalDateTime(localDateTime);
+        return ToDtoConverter.indicatorsToDto(farmIndicators);
+    }
 }

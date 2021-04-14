@@ -4,6 +4,7 @@ import com.work.working_project_1.dto.UserDto;
 import com.work.working_project_1.dto.dtoConverter.ToDtoConverter;
 import com.work.working_project_1.model.AuthToken;
 import com.work.working_project_1.model.LoginUser;
+import com.work.working_project_1.model.VerifyingUser;
 import com.work.working_project_1.security.TokenProvider;
 import com.work.working_project_1.service.PhoneVerificationService;
 import com.work.working_project_1.service.UserService;
@@ -62,19 +63,19 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/verify-otp")
-    public ResponseEntity<?> verifyOtp(@Valid @RequestParam String password, @Valid @RequestParam String phoneNumber, @Valid @RequestParam String code) {
+    public ResponseEntity<?> verifyOtp(@Valid @RequestBody VerifyingUser verifyingUser) {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        userService.getUsernameByPhoneNumber(phoneNumber),
-                        password
+                        userService.getUsernameByPhoneNumber(verifyingUser.getPhoneNumber()),
+                        verifyingUser.getPassword()
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
         currentUsername = jwtTokenUtil.getUsernameFromToken(token);
 
-        TwilioVerificationResult result = phoneVerificationService.checkVerification(phoneNumber, code);
+        TwilioVerificationResult result = phoneVerificationService.checkVerification(verifyingUser.getPhoneNumber(), verifyingUser.getCode())   ;
         if (result.isValid()) {
             return new ResponseEntity<>(new AuthToken(token), HttpStatus.OK);
         }

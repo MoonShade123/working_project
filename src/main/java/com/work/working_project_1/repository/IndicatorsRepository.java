@@ -9,6 +9,5 @@ import java.time.LocalDateTime;
 @Repository
 public interface IndicatorsRepository extends JpaRepository<FarmIndicators, Long> {
 
-    FarmIndicators findByLocalDateTime(LocalDateTime localDateTime);
-
+    FarmIndicators getByLocalDateTime(final LocalDateTime localDateTime);
 }
