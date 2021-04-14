@@ -8,9 +8,6 @@ import com.work.working_project_1.model.Farm;
 import com.work.working_project_1.model.FarmIndicators;
 import com.work.working_project_1.model.User;
 
-import java.util.Collection;
-import java.util.Collections;
-
 
 public class ToDtoConverter {
 
