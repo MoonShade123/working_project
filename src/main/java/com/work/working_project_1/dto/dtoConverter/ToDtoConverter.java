@@ -40,7 +40,7 @@ public class ToDtoConverter {
     public static IndicatorsDto indicatorsToDto(final FarmIndicators farmIndicators) {
         return new IndicatorsDto(
                 farmIndicators.getFarm().getId(),
-                farmIndicators.getLocalDateTime(),
+                farmIndicators.getCreationTime(),
                 farmIndicators.getFat(),
                 farmIndicators.getProtein(),
                 farmIndicators.getCOMO(),

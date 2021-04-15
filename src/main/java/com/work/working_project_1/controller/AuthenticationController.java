@@ -2,6 +2,7 @@ package com.work.working_project_1.controller;
 
 import com.work.working_project_1.dto.UserDto;
 import com.work.working_project_1.dto.dtoConverter.ToDtoConverter;
+import com.work.working_project_1.exceptions.CustomValidationException;
 import com.work.working_project_1.model.AuthToken;
 import com.work.working_project_1.model.LoginUser;
 import com.work.working_project_1.model.VerifyingUser;
@@ -79,7 +80,7 @@ public class AuthenticationController {
         if (result.isValid()) {
             return new ResponseEntity<>(new AuthToken(token), HttpStatus.OK);
         }
-        return new ResponseEntity<>("Something went wrong / Incorrect verification code", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new CustomValidationException("Something went wrong"), HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('USER')")

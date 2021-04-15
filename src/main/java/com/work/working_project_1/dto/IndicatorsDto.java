@@ -6,10 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -20,7 +18,7 @@ public class IndicatorsDto {
     private Long farmId;
 
     @ApiModelProperty(hidden = true)
-    private LocalDateTime localDateTime;
+    private LocalDate localDateTime;
 
     @NotNull(message = "Fat")
     private Double fat;

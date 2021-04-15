@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Year;
+import java.util.List;
 
 @Service
 public class IndicatorsService {
@@ -26,18 +29,17 @@ public class IndicatorsService {
 
     @PreAuthorize("hasRole('USER')")
     public IndicatorsDto create(final IndicatorsDto indicatorsDto) {
-
         FarmIndicators farmIndicators = FromDtoConverter.dtoToIndicators(indicatorsDto);
         farmIndicators.setFarm(farmRepository.getOne(indicatorsDto.getFarmId()));
-        farmIndicators.setLocalDateTime(LocalDateTime.now());
+        farmIndicators.setCreationTime(LocalDate.now());
         this.indicatorsRepository.save(farmIndicators);
         return ToDtoConverter.indicatorsToDto(farmIndicators);
 
     }
 
     @PreAuthorize("hasRole('USER')")
-    public IndicatorsDto getByDate(final LocalDateTime localDateTime) {
-        FarmIndicators farmIndicators = this.indicatorsRepository.getByLocalDateTime(localDateTime);
-        return ToDtoConverter.indicatorsToDto(farmIndicators);
+    public FarmIndicators findByMonth(final LocalDate localDate) {
+        return this.indicatorsRepository.findByCreationTime(localDate);
     }
+
 }

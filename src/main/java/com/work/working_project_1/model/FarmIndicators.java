@@ -7,11 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @DynamicUpdate
@@ -22,78 +21,76 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class FarmIndicators {
 
-    public static final Double MIN_VALUE = 0.5;
-    public static final Double MAX_VALUE = 1.5;
+    public static final Double MIN_VALUE_FAT = 0.5;
+    public static final Double MAX_VALUE_FAT = 1.5;
+    public static final Double MIN_VALUE_PROTEIN = 0.5;
+    public static final Double MAX_VALUE_PROTEIN = 1.5;
+    public static final Double MIN_VALUE_COMO = 0.5;
+    public static final Double MAX_VALUE_COMO = 1.5;
+    public static final Double MIN_VALUE_DRY_SUBSTANCES = 0.5;
+    public static final Double MAX_VALUE_DRY_SUBSTANCES = 1.5;
+    public static final Double MIN_VALUE_DENSITY = 0.5;
+    public static final Double MAX_VALUE_DENSITY = 1.5;
+    public static final Double MIN_VALUE_LACTOSE = 0.5;
+    public static final Double MAX_VALUE_LACTOSE = 1.5;
+    public static final Double MIN_VALUE_ADDED_WATER = 0.5;
+    public static final Double MAX_VALUE_ADDED_WATER = 1.5;
+    public static final Double MIN_VALUE_SAMPLE_TEMPERATURE = 0.5;
+    public static final Double MAX_VALUE_SAMPLE_TEMPERATURE = 1.5;
+    public static final Double MIN_VALUE_FREEZING_POINT = 0.5;
+    public static final Double MAX_VALUE_FREEZING_POINT = 1.5;
+    public static final Double MIN_VALUE_SALTS = 0.5;
+    public static final Double MAX_VALUE_SALTS = 1.5;
+    public static final Double MIN_VALUE_PH = 0.5;
+    public static final Double MAX_VALUE_PH = 1.5;
+    public static final Double MIN_VALUE_CONDUCTIVITY = 0.5;
+    public static final Double MAX_VALUE_CONDUCTIVITY = 1.5;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime localDateTime = LocalDateTime.now();
+    private LocalDate creationTime;
 
     @NotNull(message = "Fat mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double fat;
 
     @NotNull(message = "Protein mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double protein;
 
     @NotNull(message = "COMO mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double COMO;
 
     @NotNull(message = "Dry substances mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double dry_substances;
 
     @NotNull(message = "Density mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double density;
 
     @NotNull(message = "Lactose mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double lactose;
 
     @NotNull(message = "Added water mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double added_water;
 
     @NotNull(message = "Sample temperature mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double sample_temperature;
 
     @NotNull(message = "Freezing point mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double freezing_point;
 
     @NotNull(message = "Salts mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double salts;
 
     @NotNull(message = "pH mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double pH;
 
     @NotNull(message = "Conductivity mush be filled")
-    @DecimalMin("0.5")
-    @DecimalMax("1.5")
     private Double conductivity;
 
     @ManyToOne
     @JoinColumn(name = "farm_id")
     @JsonIgnore
     private Farm farm;
-
+    
 }
