@@ -18,41 +18,41 @@ public class IndicatorsDto {
     private Long farmId;
 
     @ApiModelProperty(hidden = true)
-    private LocalDate localDateTime;
+    public LocalDate localDateTime;
 
     @NotNull(message = "Fat")
-    private Double fat;
+    public Double fat;
 
     @NotNull(message = "protein")
-    private Double protein;
+    public Double protein;
 
     @NotNull(message = "COMO")
-    private Double COMO;
+    public Double COMO;
 
     @NotNull(message = "dry_substances")
-    private Double dry_substances;
+    public Double dry_substances;
 
     @NotNull(message = "density")
-    private Double density;
+    public Double density;
 
     @NotNull(message = "lactose")
-    private Double lactose;
+    public Double lactose;
 
     @NotNull(message = "added_water")
-    private Double added_water;
+    public Double added_water;
 
     @NotNull(message = "sample_temperature")
-    private Double sample_temperature;
+    public Double sample_temperature;
 
     @NotNull(message = "freezing_point")
-    private Double freezing_point;
+    public Double freezing_point;
 
     @NotNull(message = "salts")
-    private Double salts;
+    public Double salts;
 
     @NotNull(message = "pH")
-    private Double pH;
+    public Double pH;
 
     @NotNull(message = "conductivity")
-    private Double conductivity;
+    public Double conductivity;
 }

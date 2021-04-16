@@ -1,5 +1,6 @@
 package com.work.working_project_1.controller;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.work.working_project_1.dto.AllFarmDto;
 import com.work.working_project_1.dto.FarmDto;
 import com.work.working_project_1.dto.IndicatorsDto;
@@ -7,6 +8,7 @@ import com.work.working_project_1.model.FarmIndicators;
 import com.work.working_project_1.service.FarmService;
 import com.work.working_project_1.service.IndicatorsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +36,7 @@ public class FarmController {
     }
 
     @PostMapping("/add-indicators")
-    public ResponseEntity<IndicatorsDto> createFarmIndicators(@Valid @RequestBody final IndicatorsDto indicatorsDto) {
+    public ResponseEntity<IndicatorsDto> createFarmIndicators(@Valid @RequestBody final IndicatorsDto indicatorsDto) throws IllegalAccessException, UnirestException {
         return new ResponseEntity<>(this.indicatorsService.create(indicatorsDto), HttpStatus.OK);
     }
 
@@ -48,17 +50,9 @@ public class FarmController {
         return new ResponseEntity<>(this.farmService.getByName(farmName), HttpStatus.OK);
     }
 
-//    @GetMapping("/indicators-nominal/{indicatorName}")
-//    public ResponseEntity getIndicatorsNominal(@PathVariable String indicatorName, IndicatorsNominal indicatorsNominal) {
-//        indicatorsNominal.setName(indicatorName);
-//        indicatorsNominal.setMinValue(0.5);
-//        indicatorsNominal.setMaxValue(1.5);
-//        return new ResponseEntity<>(indicatorsNominal.toJson(),  HttpStatus.OK);
-//    }
-//
-    @GetMapping("/find-by-date/{localDate}")
-    public ResponseEntity<FarmIndicators> getIndicatorsByDate(@PathVariable final LocalDate localDate) {
-        return new ResponseEntity<>(this.indicatorsService.findByMonth(localDate), HttpStatus.OK);
+    @GetMapping("/find/{id}/{localDate}")
+    public ResponseEntity<FarmIndicators> getIndicatorsByDate(@PathVariable final Long id, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate localDate) {
+        return new ResponseEntity<>(this.indicatorsService.findByIdAndDate(id, localDate), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

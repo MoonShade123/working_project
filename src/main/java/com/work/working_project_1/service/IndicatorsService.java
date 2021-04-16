@@ -1,5 +1,6 @@
 package com.work.working_project_1.service;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.work.working_project_1.dto.IndicatorsDto;
 import com.work.working_project_1.dto.dtoConverter.FromDtoConverter;
 import com.work.working_project_1.dto.dtoConverter.ToDtoConverter;
@@ -28,7 +29,7 @@ public class IndicatorsService {
     }
 
     @PreAuthorize("hasRole('USER')")
-    public IndicatorsDto create(final IndicatorsDto indicatorsDto) {
+    public IndicatorsDto create(final IndicatorsDto indicatorsDto) throws IllegalAccessException, UnirestException {
         FarmIndicators farmIndicators = FromDtoConverter.dtoToIndicators(indicatorsDto);
         farmIndicators.setFarm(farmRepository.getOne(indicatorsDto.getFarmId()));
         farmIndicators.setCreationTime(LocalDate.now());
@@ -38,8 +39,8 @@ public class IndicatorsService {
     }
 
     @PreAuthorize("hasRole('USER')")
-    public FarmIndicators findByMonth(final LocalDate localDate) {
-        return this.indicatorsRepository.findByCreationTime(localDate);
+    public FarmIndicators findByIdAndDate(final Long id, final LocalDate localDate) {
+        return this.indicatorsRepository.findByCreationTimeAndFarm(id, localDate);
     }
 
 }

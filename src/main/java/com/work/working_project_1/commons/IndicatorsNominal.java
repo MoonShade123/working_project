@@ -9,9 +9,9 @@ import java.util.HashMap;
 @Setter
 public class IndicatorsNominal {
 
-    private String name;
-    private Double minValue;
-    private Double maxValue;
+    public String name;
+    public Double minValue;
+    public Double maxValue;
 
     public IndicatorsNominal(String name, Double minValue, Double maxValue) {
         this.name = name;
